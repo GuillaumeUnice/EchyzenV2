@@ -1,0 +1,62 @@
+.panel-content{
+    vertical-align: top;
+    width: 100%;
+    padding: 20px 0 0 0;
+}
+
+.panel-content-inner {
+    width: 100%;
+}
+
+.home__head {
+    width: 100%;
+    height: 100px;
+    margin:50px 0;
+    padding: 0 40px;
+}
+
+.home__search {
+    display: block;
+    float: right;
+    width: 25%;
+    height: 100px;
+    padding: 16px;
+    background: #ececec;
+
+}
+
+.home__search__switch__message {
+    display: block;
+    text-shadow: none;
+    position: absolute;
+    right: 20px;
+    color: #333333;
+    line-height: 68px;
+    margin-left: 70px;
+    font-size: 15pt;
+    font-weight: 300;
+}
+
+input.home__search__switch + label + span.home__search__switch__message:after {
+    content: "Pas en recherche";
+}
+
+input.home__search__switch:checked + label + span.home__search__switch__message:after {
+    content: "En recherche";
+}
+
+.home__content {
+    width: 60%;
+    margin: 20px auto;
+}
+
+.home__suggestions,
+.home__moderateurs {
+    margin: 70px auto !important;
+    text-align: left !important;
+}
+
+.home__suggestions > h2,
+.home__moderateurs > h2 {
+    margin: 20px 0;
+}

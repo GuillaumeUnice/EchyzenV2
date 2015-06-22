@@ -1,0 +1,24 @@
+
+/************************************
+ *           Spécialités            *
+ ************************************/
+
+#offre__validation__form {
+    display: none;
+}
+
+
+.offre__specialites {
+    background: #DCE775;
+    color: #333333;
+    text-shadow: none;
+    padding: 16px;
+}
+
+.offre__specialites__offre__formulaire {
+    text-align: center;
+}
+
+.select2.select2-container.select2-container--default {
+    width: 100% !important;
+}

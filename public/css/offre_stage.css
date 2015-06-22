@@ -1,0 +1,213 @@
+/***** Intern offer stylesheet *****/
+
+
+
+/************************************
+ *             General              *
+ ************************************/
+
+
+.offre, .etudiant {
+    width: 100%;
+    font-size: 11pt;
+    font-weight: 300;
+    text-align: left;
+    display: inline-block;
+    float: left;
+}
+
+.offre__block {
+    width: 100%;
+    background: #ececec;
+    padding: 16px;
+    color: #333;
+    margin-bottom: 16px;
+    display: table;
+    text-shadow: none;
+
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(156,156,156,1);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(156,156,156,1);
+    box-shadow: 1px 1px 5px 0px rgba(156,156,156,1);
+}
+
+.offre__block__row {
+    display: table-row;
+}
+
+.offre__block__header {
+    margin-bottom: 10px;
+}
+
+.offre__block__header > span {
+    font-size: 18pt;
+    color: #679037;
+}
+
+.block__header__name {
+    color: #333 !important;
+    margin-left: 10px;
+    font-weight: 300;
+    font-size: 14pt !important;
+}
+
+.offre__block__cell {
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.offre__block__cell__left {
+    height: 100%;
+    display: table-cell;
+    vertical-align: top;
+    float: left;
+}
+
+.offre__block__cell__right {
+    height: 100%;
+    width: 50%;
+    display: table-cell;
+    vertical-align: top;
+}
+
+span.titre {
+    font-size: 11pt;
+    font-weight: 500;
+    margin-right: 5px;
+    color: #39432E;
+}
+
+/************************************
+ *              Header              *
+ ************************************/
+
+
+.offre__header {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px !important;
+    display: inline-block;
+}
+
+.offre__header__titre {
+    float: left;
+    width: 100%;
+    display: inline-block;
+}
+
+.offre__header__titre > span {
+    line-height: 34px;
+    font-size: 22pt;
+}
+
+
+
+
+
+/************************************
+ *            Entreprise            *
+ ************************************/
+
+
+.offre__entreprise {
+    min-height: 80px;
+}
+
+.offre__entreprise__header {
+    margin-bottom: 25px;
+}
+
+.offre__entreprise__header__title {
+    display: inline-block;
+    float: left;
+    width: 69%;
+}
+
+.offre__entreprise__header__name {
+    font-size: 18pt;
+    color: #679037;
+}
+
+.offre__entreprise__header__place {
+    font-size: 14pt;
+    font-weight: 300;
+    margin-left: 10px;
+}
+
+.offre__entreprise__header__secteur {
+    display: inline-block;
+    width: 30%;
+    text-align: right;
+    font-size: 14pt;
+    font-weight: 300;
+}
+
+.offre__entreprise__content__title {
+    margin-bottom: 10px;
+    font-size: 11pt;
+    font-weight: 500;
+    color: #39432E;
+}
+
+.offre__entreprise__content__description {
+    text-align: justify;
+}
+
+.offre__entreprise__footer {
+    margin-top : 20px;
+}
+
+.offre__entreprise__footer__website {
+    display: inline-block;
+    float: left;
+    width: 49%;
+}
+
+.offre__entreprise__footer__feedbacks {
+    display: inline-block;
+    width: 50%;
+    text-align: right;
+}
+
+
+/************************************
+ *             Feedbacks            *
+ ************************************/
+
+.offre__infos__tags,
+.block__header__feedbacks > a {
+    margin-top: 5px;
+}
+
+.block__header__feedbacks {
+    text-align: right !important;
+}
+
+.offre__feedback_item {
+    color: #333;
+    text-align: justify;
+    text-shadow: none;
+    background: #CCCCCC;
+    margin-bottom: 3px;
+    padding: 16px;
+}
+
+.offre__feedback_item:last-child {
+    margin-bottom: 16px;
+}
+
+.offre__feedback__item__titre {
+    color: #679037;
+    font-size: 13pt;
+    margin-bottom: 5px;
+}
+
+
+/************************************
+ *             Etudiant             *
+ ************************************/
+
+
+
+
+

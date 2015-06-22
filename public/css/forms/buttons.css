@@ -1,0 +1,71 @@
+.btn-form {
+    height: 36px;
+    min-width: 100px;
+    padding:0 16px;
+    margin: 0 2px;
+    line-height: 28px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #689F38;
+    border:none;
+    border-radius: 4px;
+}
+
+.btn-form:hover {
+    background-color: #8BC34A;
+    text-decoration: none;
+}
+
+.btn-orange-edit,
+.btn-red-trash,
+.btn-blue-view {
+    font-size: 18px;
+    padding: 0 8px;
+    min-width: 20px !important;
+    margin:4px;
+    background-color: transparent !important;
+}
+
+.btn-orange-edit:hover, .btn-orange-edit:hover > *,
+.btn-red-trash:hover, .btn-red-trash:hover > *,
+.btn-blue-view:hover, .btn-blue-view:hover > * {
+    color: #4C4C4C;
+    text-decoration: none;
+}
+
+.btn-orange-edit > * {
+    color: #FFC400;
+}
+
+
+.btn-blue-view > * {
+    color: #448AFF;
+}
+
+.btn-red-trash > * {
+    color: #F4511E;
+}
+
+.btn-float-action {
+    height: 56px; width: 56px;
+    border-radius: 50px;
+    padding: 12px 20px;
+    font-size: 24px;
+}
+
+.btn-float-action:hover{
+    text-decoration: none;
+}
+
+.btn-green {
+    color: #ffffff;
+    background-color: #689F38;
+}
+
+.btn-green:hover {
+    background-color: #8BC34A;
+}
+
+.btn-m36 {
+    margin-top: 36px;
+}

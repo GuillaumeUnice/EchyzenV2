@@ -1,0 +1,67 @@
+.crud-list {
+    text-align: left !important;
+}
+
+.crud-list-item {
+    display: block;
+    height: 46px;
+    margin-top: 10px;
+    padding: 6px 10px;
+    background: #7F7F7F;
+    border-radius: 4px;
+    color: #EEEEEE;
+}
+
+.crud-list-left,
+.crud-list-center,
+.update-form,
+.crud-list-right {
+    position: relative;
+    display: inline-block;
+}
+
+.crud-list-left {
+    padding-left: 10px;
+    margin-top: 8px;
+}
+
+.crud-list-right {
+    float: right;
+}
+
+.crud-list-name {
+    margin-left: 5px;
+}
+
+.crud-list-right > .btn {
+    margin-left: 3px;
+}
+
+.update-form {
+    display: none;
+}
+
+.crud-list-delete {
+    display: inline-block;
+}
+
+.btn-form {
+    display: inline-block;
+ }
+
+.update-promotion-form {
+    display: inline-block;
+    float: right;
+    margin-left: 15px;
+    color: #8BC34A;
+}
+
+.list-item-delete {
+    background: none;
+    border: none;
+    color:#8BC34A;
+}
+
+.list-item-delete:hover {
+    color: #d9534f ;
+}
