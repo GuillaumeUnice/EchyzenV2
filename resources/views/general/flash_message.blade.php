@@ -8,8 +8,8 @@
     <div class="alert alert-success"> {{ Session::get('flash_success') }} </div><br/>
 @endif
 
-@if (Session::has('flash_info'))
-    <div class="alert alert-info"> {{ Session::get('flash_info') }} </div><br/>
+@if (Session::has('flash_notice'))
+    <div class="alert alert-info"> {{ Session::get('flash_notice') }} </div><br/>
 @endif
 
 @if (Session::has('flash_primary'))

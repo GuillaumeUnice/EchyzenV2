@@ -16,8 +16,7 @@ Thumbs.db
 .git
 .gitattributes
 /app/config/mail.php
-/public/uploads/ecole
-/public/uploads/etudiants
+/public/uploads
 /bootstrap/cache
 
 

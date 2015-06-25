@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\Model\Motcle;
+
 class MotCleTableSeeder extends Seeder {
     public function run()
     {

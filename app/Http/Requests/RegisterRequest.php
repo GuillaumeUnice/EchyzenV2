@@ -1,6 +1,5 @@
 <?php namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 
 class RegisterRequest extends Request {
 
@@ -22,7 +21,7 @@ class RegisterRequest extends Request {
 	public function rules()
 	{
 		return [
-            'name' => 'required|min:2|max:60:|regex:/^[a-zA-Z\_\- ]+$/',
+            'username' => 'required|min:2|max:60:|unique:users,username|regex:/^[a-zA-Z\_\- ]+$/',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:5|max:60|confirmed',
 		];

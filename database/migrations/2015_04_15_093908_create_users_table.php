@@ -21,11 +21,14 @@ class CreateUsersTable extends Migration {
             $table->string('remember_token', 100)->nullable();
 
             $table->boolean('confirmed')->default(0);
-            $table->string('confirmation_code')->nullable();
+            $table->string('token')->nullable();
 
             $table->string('website', 255)->nullable();
-            $table->string('twitter', 255)->nullable();
-            $table->string('facebook', 255)->nullable();
+            $table->string('twitter', 60)->nullable();
+            $table->string('facebook', 60)->nullable();
+            $table->string('viadeo', 60)->nullable();
+            $table->string('linkedin', 60)->nullable();
+            $table->string('google+', 60)->nullable();
 
             $table->timestamp('birthday')->nullable();
             $table->string('country', 255)->nullable();
@@ -35,6 +38,7 @@ class CreateUsersTable extends Migration {
             $table->string('job', 255)->nullable();
 
             $table->boolean('newsletter')->default(0);
+            $table->integer('image_size')->unsigned()->nullable();
 
             $table->timestamps();
 		});

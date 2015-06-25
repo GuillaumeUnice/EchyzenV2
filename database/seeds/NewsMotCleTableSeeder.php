@@ -1,5 +1,10 @@
 <?php
 
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\Model\News;
+use App\Model\Motcle;
+
 class NewsMotCleTableSeeder extends Seeder {
     public function run()
     {

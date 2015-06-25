@@ -1,5 +1,11 @@
 <?php
 
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\Model\News;
+use App\Model\Image;
+use App\Model\Rubrique;
+
 class NewsTableSeeder extends Seeder {
     public function run()
     {

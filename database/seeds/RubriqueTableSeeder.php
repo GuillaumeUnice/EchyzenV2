@@ -1,4 +1,8 @@
 <?php
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\Model\Image;
+use App\Model\Rubrique;
 
 class RubriqueTableSeeder extends Seeder {
     public function run()
@@ -9,7 +13,6 @@ class RubriqueTableSeeder extends Seeder {
             ['Site', 'site.png'],
             ['Découverte', 'decouverte.png']
         ];
-        //die(var_dump($records));
         for($i = 0; $i < count($records); $i++) {
             $image = Image::where('url', '=', $records[$i][1])
                 ->select('id')->first();

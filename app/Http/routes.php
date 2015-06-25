@@ -11,13 +11,33 @@
 |
 */
 
-Route::get('/',
+/*
+ |---------------------------------------------------------------------------------------------------------------------|
+ |---------------------------------------------------------------------------------------------------------------------|
+ |                                                      AUTH                                                           |
+ |---------------------------------------------------------------------------------------------------------------------|
+ |---------------------------------------------------------------------------------------------------------------------|
+ */
+Route::controllers(
     [
-        'as' => 'index',
-        'uses' => 'Auth\AuthController@getLogin'
+        'auth' => 'Auth\AuthController',
+        'password' => 'Auth\PasswordController',
     ]
 );
 
+Route::get('/verify/{token}',
+    [
+        'as' => 'verify',
+        'uses' => 'Auth\AuthController@getVerify'
+    ]
+);
+
+Route::get('/',
+    [
+        'as' => 'index',
+        'uses' => 'IndexController@index'
+    ]
+);
 Route::get('/logout',
     [
         'as' => 'logout',
@@ -25,16 +45,18 @@ Route::get('/logout',
     ]
 );
 
-Route::get('/inscription/{token}',
+Route::get('/register',
     [
-        'as' => 'inscription_etudiant',
-        'uses' => 'Auth\AuthController@getInscription'
+        'as' => 'register',
+        'uses' => 'Auth\AuthController@getRegister'
     ]
 );
 
-Route::post('/inscription/{token}', 'Auth\AuthController@postInscription');
-
-
+Route::post('/register',
+    [
+        'uses' => 'Auth\AuthController@postRegister'
+    ]
+);
 
 /*
  |---------------------------------------------------------------------------------------------------------------------|
@@ -74,10 +96,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function () {
 });
 
 
-
-Route::controllers(
+Route::get('/upload_image',
     [
-        'auth' => 'Auth\AuthController',
-        'password' => 'Auth\PasswordController',
+        'as' => 'upload_image',
+        'uses' => 'Upload\ImageUploadController@getUpload'
     ]
 );
+
+Route::post('/upload_image', 'Upload\ImageUploadController@postUpload');

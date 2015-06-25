@@ -2,24 +2,17 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
 use App\Http\Requests\RegisterRequest;
-use App\Entreprise;
-use App\User;
-use App\Etudiant;
-use Illuminate\Support\Facades\Session;
-use App\Http\Requests\InscriptionEntrepriseRequest;
-use App\Role;
-use App\Moderateur;
-use App\Token;
-use App\Administrateur;
+use Illuminate\Support\Facades\File;
+use App\Model\User;
 
 class AuthController extends Controller
 {
@@ -54,112 +47,8 @@ class AuthController extends Controller
     public function getLogin()
     {
 
-        return View::make('general/public');
+        return View::make('auth/login');
     }
-
-    /**
-     * Affiche le formulaire d'inscription avec vérification du token
-     *
-     * @return View
-     */
-    public function getEtudiantInscription($token)
-    {
-        if (!$token) return'Error 404';
-        $token = Token::whereToken($token)->first();
-        if (!$token) return 'Error 404';
-
-        return View::make('auth/register');
-    }
-
-    /**
-     * Affiche le formulaire d'inscription avec vérification du token
-     *
-     * @return View
-     */
-    public function getModerateurInscription($token)
-    {
-        if (!$token) return 'Error 404';
-        $token = Token::whereToken($token)->first();
-        if (!$token) return 'Error 404';
-
-        return View::make('auth/register');
-    }
-
-    /**
-     * Affiche le formulaire d'inscription
-     *
-     * @return View
-     */
-    public function getEntrepriseInscription()
-    {
-        return View::make('auth/entreprise_inscription');
-    }
-
-    private function inscrire($user_type, $type, $role, $isValide)
-    {
-
-        $user = new User;
-        $user->name = Input::get('name');
-        $user->email = Input::get('email');
-        $user->password = Hash::make(Input::get('password'));
-        $user->role_id = $role;
-        if ($isValide) $user->valide = 1;
-        $user->user_type = $user_type;
-
-        DB::transaction(function () use ($user, $type) {
-            $type->save();
-            $user->user_id = $type->id;
-            $user->save();
-        });
-    }
-
-    /**
-     * Traitement du formulaire d'inscription
-     *
-     * @return Redirect
-     */
-    public function postEntrepriseInscription(InscriptionEntrepriseRequest $request)
-    {
-        $user_type = 'App\Entreprise';
-        $entreprise = new Entreprise;
-        $entreprise->nom = Input::get('nom_entreprise');
-        $role = Role::whereNom('entreprise')->first();
-
-        $this->inscrire($user_type, $entreprise, $role->id, false);
-
-        return Redirect::refresh()->with('flash_success', 'Votre demande d\'inscription a été prise en compte! Un moderateur va valider et activer le compte vous serez informé par mail dans les plus bref delais');
-    }
-
-    public function postEtudiantInscription($token, RegisterRequest $request)
-    {
-        if (!$token) return 'Error 404';
-        $token = Token::whereToken($token)->first();
-        if (!$token) return 'Error 404';
-
-        $user_type = 'App\Etudiant';
-        $etudiant = new Etudiant;
-        $role = Role::whereNom('etudiant')->first();
-        $this->inscrire($user_type, $etudiant, $role->id, true);
-        Token::whereToken($token->token)->delete();
-
-        return Redirect::route('index')->with('flash_success', 'Votre inscription est effectuée vous pouvez vous connecter!!!');
-    }
-
-    public function postModerateurInscription($token, RegisterRequest $request)
-    {
-        if (!$token) return 'Error 404';
-        $token = Token::whereToken($token)->first();
-        if (!$token) return 'Error 404';
-
-        $user_type = 'App\Moderateur';
-        $moderateur = new Moderateur;
-        $role = Role::whereNom('moderateur')->first();
-        $this->inscrire($user_type, $moderateur, $role->id, true);
-        Token::whereToken($token->token)->delete();
-
-        return Redirect::route('index')->with('flash_success', 'Votre inscription est effectuée vous pouvez vous connecter!!!');
-    }
-
 
     /**
      * Traitement du formulaire de login
@@ -168,19 +57,15 @@ class AuthController extends Controller
      */
     public function postLogin()
     {
-        $email = Input::get('email');
+        $username = Input::get('username');
         $passe = Input::get('password');
 
-        if (Auth::attempt(array('email' => $email, 'password' => $passe, 'valide' => 1), Input::get('souvenir'))) {
+        if (Auth::attempt(array('username' => $username, 'password' => $passe, 'confirmed' => 1), Input::get('souvenir'))) {
 
-            $role = Auth::user()->role;
-            Session::put('role_nom', $role->nom);
-            Session::put('role_autorisation', $role->id);
-
-            return $this->getAccueil();
+            return Redirect::intended()->with('flash_success', 'Vous êtes connecté !');
 
         } else {
-            return Redirect::refresh()->with('flash_error', 'Pseudo/mot de passe non correct ou mail non validé !')->withInput();
+            return Redirect::intended()->with('flash_error', 'Pseudo/mot de passe non correct ou mail non validé !')->withInput();
         }
     }
 
@@ -192,8 +77,89 @@ class AuthController extends Controller
     public function getLogout()
     {
         Auth::logout();
-        return Redirect::route('index')->with('flash_notice', 'Vous avez été correctement déconnecté.');
+        return Redirect::intended()->with('flash_notice', 'Vous avez été correctement déconnecté.');
     }
+
+
+    /**
+     * Affiche le formulaire d'inscription
+     *
+     * @return View
+     */
+    public function getRegister()
+    {
+        if (Request::ajax()) {
+            return View::make('modal.register');
+        } else {
+            return View::make('auth.register');
+        }
+
+    }
+
+    /**
+     * Traitement du formulaire d'inscription
+     *
+     * @return Redirect
+     */
+    public function postRegister( RegisterRequest $registerRequest)
+    {
+
+        $user = new User;
+        $user->username = Input::get('username');
+        $user->email = Input::get('email');
+        $user->password = Hash::make(Input::get('password'));
+
+        $user->token = str_random(30);
+        $data = array(  'token' => $user->token,
+                        'username' => Input::get('username'));
+        Mail::send('mail.register', $data, function($message) {
+            $message->from( 'echyzen.website@gmail.com', 'Echyzen' )
+                ->to(Input::get('email'), Input::get('username'))
+                ->subject('Echyzen : Verify your email address');
+        });
+        $path = public_path() . '/uploads/users/' . strtolower(Input::get('username'));
+        File::makeDirectory($path, $mode = 0777, true, true);
+        File::makeDirectory($path . '/profil', $mode = 0777, true, true);
+        File::makeDirectory($path . '/images', $mode = 0777, true, true);
+
+        $user->save();
+        $array = array('success' => 'Vous êtes inscris !');
+        return Response::json($array);
+        //return Redirect::back()->with('flash_notice', 'Votre compte a été créé.');
+
+        //return Redirect::refresh()->withErrors($v)->withInput();
+    }
+
+    /**
+     * Effectue la verification de mail pour confirmer le compte utilisateur
+     *
+     * @return View
+     */
+    public function getVerify($token)
+    {
+        if (!$token) return'Error 404';
+        $user = User::whereToken($token)->first();
+        if (!$user) return 'Error 404';
+        $user->confirmed = 1;
+        $user->token = null;
+        $user->save();
+        return Redirect::route('index')->with('flash_success', 'Votre inscription est effectuée vous pouvez vous connecter!!!');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public function getAccueil()
@@ -211,4 +177,19 @@ class AuthController extends Controller
 
         return "Error 404";
     }
+
+
+
+
+    /*private function view($array) {
+        if (Request::wantsJson()) {
+            return Response::json($array);
+        } else {
+            return  Redirect::route('accueil-etudiant')->with('flash_error', 'Accès refusée!!!');
+        }
+    } // view()
+    //$array = array('success' => 'Vous êtes connecté !');
+            //return Response::json($array);
+           // return Redirect::to('/')->with('flash_error', 'Vous êtes connecté !');
+*/
 }

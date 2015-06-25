@@ -1,5 +1,10 @@
 <?php
 
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\Model\User;
+use Illuminate\Support\Facades\Hash;
+
 class UserTableSeeder extends Seeder {
     public function run()
     {
