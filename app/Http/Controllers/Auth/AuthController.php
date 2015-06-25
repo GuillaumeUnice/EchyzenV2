@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Response;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\File;
 use App\Model\User;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -110,20 +111,27 @@ class AuthController extends Controller
         $user->username = Input::get('username');
         $user->email = Input::get('email');
         $user->password = Hash::make(Input::get('password'));
+        $user->role = config('role.user');
 
         $user->token = str_random(30);
         $data = array(  'token' => $user->token,
-                        'username' => Input::get('username'));
-        Mail::send('mail.register', $data, function(Message $message) {
-            $message->to(Input::get('email'), Input::get('username'))
-                ->subject('Echyzen : Verify your email address');
-        });
-        $path = public_path() . '/uploads/users/' . strtolower(Input::get('username'));
-        File::makeDirectory($path, $mode = 0777, true, true);
-        File::makeDirectory($path . '/profil', $mode = 0777, true, true);
-        File::makeDirectory($path . '/images', $mode = 0777, true, true);
+            'username' => Input::get('username'));
 
-        $user->save();
+        DB::transaction(function() use ($data, $user)
+        {
+
+            Mail::send('mail.register', $data, function(Message $message) {
+                $message->to(Input::get('email'), Input::get('username'))
+                    ->subject('Echyzen : Verify your email address');
+            });
+            $path = public_path() . '/uploads/users/' . strtolower(Input::get('username'));
+            File::makeDirectory($path, $mode = 0777, true, true);
+            File::makeDirectory($path . '/profil', $mode = 0777, true, true);
+            File::makeDirectory($path . '/images', $mode = 0777, true, true);
+
+            $user->save();
+        });
+
 
         if (Request::ajax()) {
             $array = array('success' => 'Vous êtes inscris! Un email de confirmation vous a été envoyé');
@@ -140,9 +148,9 @@ class AuthController extends Controller
      */
     public function getVerify($token)
     {
-        if (!$token) return'Error 404';
+        if (!$token) abort(404);
         $user = User::whereToken($token)->first();
-        if (!$user) return 'Error 404';
+        if (!$user) abort(404);
         $user->confirmed = 1;
         $user->token = null;
         $user->save();

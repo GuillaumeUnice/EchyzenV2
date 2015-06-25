@@ -23,6 +23,10 @@ class CreateUsersTable extends Migration {
             $table->boolean('confirmed')->default(0);
             $table->string('token')->nullable();
 
+            $table->boolean('newsletter')->default(0);
+            $table->integer('image_size')->unsigned()->default(0);
+            $table->integer('role')->unsigned()->default(0);
+
             $table->string('website', 255)->nullable();
             $table->string('twitter', 60)->nullable();
             $table->string('facebook', 60)->nullable();
@@ -36,9 +40,6 @@ class CreateUsersTable extends Migration {
             $table->string('sexe', 255)->nullable();
             $table->string('hobby', 255)->nullable();
             $table->string('job', 255)->nullable();
-
-            $table->boolean('newsletter')->default(0);
-            $table->integer('image_size')->unsigned()->nullable();
 
             $table->timestamps();
 		});
