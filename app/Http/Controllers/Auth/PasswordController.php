@@ -5,6 +5,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Message;
 
 class PasswordController extends Controller {
 
@@ -46,9 +47,8 @@ class PasswordController extends Controller {
     {
         $this->validate($request, ['email' => 'required|email']);
 
-        $response = $this->passwords->sendResetLink($request->only('email'), function ($m) {
-            $m->from( 'echyzen.website@gmail.com', 'Echyzen' )
-                ->subject($this->getEmailSubject());
+        $response = $this->passwords->sendResetLink($request->only('email'), function (Message $m) {
+            $m->subject($this->getEmailSubject());
 
         });
 

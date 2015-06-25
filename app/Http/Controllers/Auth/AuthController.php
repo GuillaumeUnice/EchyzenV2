@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Auth;
 
+use Illuminate\Mail\Message;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
@@ -48,7 +49,7 @@ class AuthController extends Controller
     {
 
         return View::make('auth/login');
-    }
+    } // getLogin()
 
     /**
      * Traitement du formulaire de login
@@ -67,7 +68,7 @@ class AuthController extends Controller
         } else {
             return Redirect::intended()->with('flash_error', 'Pseudo/mot de passe non correct ou mail non validé !')->withInput();
         }
-    }
+    } // postLogin()
 
     /**
      * Effectue le logout
@@ -78,7 +79,7 @@ class AuthController extends Controller
     {
         Auth::logout();
         return Redirect::intended()->with('flash_notice', 'Vous avez été correctement déconnecté.');
-    }
+    } // logout()
 
 
     /**
@@ -94,12 +95,13 @@ class AuthController extends Controller
             return View::make('auth.register');
         }
 
-    }
+    } // getRegister()
 
     /**
      * Traitement du formulaire d'inscription
      *
-     * @return Redirect
+     * @return Redirect si requête HTML
+     * @return Response si requête Ajax Json
      */
     public function postRegister( RegisterRequest $registerRequest)
     {
@@ -112,9 +114,8 @@ class AuthController extends Controller
         $user->token = str_random(30);
         $data = array(  'token' => $user->token,
                         'username' => Input::get('username'));
-        Mail::send('mail.register', $data, function($message) {
-            $message->from( 'echyzen.website@gmail.com', 'Echyzen' )
-                ->to(Input::get('email'), Input::get('username'))
+        Mail::send('mail.register', $data, function(Message $message) {
+            $message->to(Input::get('email'), Input::get('username'))
                 ->subject('Echyzen : Verify your email address');
         });
         $path = public_path() . '/uploads/users/' . strtolower(Input::get('username'));
@@ -123,17 +124,19 @@ class AuthController extends Controller
         File::makeDirectory($path . '/images', $mode = 0777, true, true);
 
         $user->save();
-        $array = array('success' => 'Vous êtes inscris !');
-        return Response::json($array);
-        //return Redirect::back()->with('flash_notice', 'Votre compte a été créé.');
 
-        //return Redirect::refresh()->withErrors($v)->withInput();
-    }
+        if (Request::ajax()) {
+            $array = array('success' => 'Vous êtes inscris! Un email de confirmation vous a été envoyé');
+            return Response::json($array);
+        } else {
+            return Redirect::back()->with('flash_success', 'Vous êtes inscris! Un email de confirmation vous a été envoyé');
+        }
+    } // postRegister()
 
     /**
      * Effectue la verification de mail pour confirmer le compte utilisateur
      *
-     * @return View
+     * @return Redirect
      */
     public function getVerify($token)
     {
@@ -143,53 +146,7 @@ class AuthController extends Controller
         $user->confirmed = 1;
         $user->token = null;
         $user->save();
-        return Redirect::route('index')->with('flash_success', 'Votre inscription est effectuée vous pouvez vous connecter!!!');
-    }
+        return Redirect::route('index')->with('flash_success', 'Votre inscription est confirmée vous pouvez vous connecter!!!');
+    } // getVerify()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function getAccueil()
-    {
-
-        if (Auth::user()->user_type == get_class(new Entreprise())) {
-            return Redirect::route('accueil-entreprise')->with('flash_success', 'Bonjour' . Auth::user()->username . ' !');
-        } elseif (Auth::user()->user_type == get_class(new Etudiant())) {
-            return Redirect::route('accueil-etudiant')->with('flash_success', 'Bonjour' . Auth::user()->username . ' !');
-        } elseif (Auth::user()->user_type == get_class(new Moderateur())) {
-            return Redirect::route('accueil-moderateur')->with('flash_success', 'Bonjour' . Auth::user()->username . ' !');
-        } elseif (Auth::user()->user_type == get_class(new Administrateur())) {
-            return Redirect::route('accueil-administrateur')->with('flash_success', 'Bonjour' . Auth::user()->username . ' !');
-        }
-
-        return "Error 404";
-    }
-
-
-
-
-    /*private function view($array) {
-        if (Request::wantsJson()) {
-            return Response::json($array);
-        } else {
-            return  Redirect::route('accueil-etudiant')->with('flash_error', 'Accès refusée!!!');
-        }
-    } // view()
-    //$array = array('success' => 'Vous êtes connecté !');
-            //return Response::json($array);
-           // return Redirect::to('/')->with('flash_error', 'Vous êtes connecté !');
-*/
 }
