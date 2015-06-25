@@ -1,7 +1,5 @@
 <?php namespace App\Providers;
 
-use App\Variable;
-use Illuminate\Database\QueryException;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
