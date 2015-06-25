@@ -1,10 +1,10 @@
 <?php namespace App\Http\Middleware;
 
-use App\Moderateur;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use App\Administrateur;
 
-class AuthenticateModerateur {
+class AuthenticateAdministrator {
 
 	/**
 	 * The Guard implementation.
@@ -37,23 +37,23 @@ class AuthenticateModerateur {
 		{
 			if ($request->ajax())
 			{
-				return response('Unauthorized.', 401);
+				return response('Unauthorized.', 403);
 			}
 			else
 			{
-                return redirect()->back()->with('flash_error', 'Page non autorisée! Vous devez être un modérateur!');
+                abort(403);
 			}
 		} else {
 
-            if(!($this->auth->user()->user_type == get_class(new Moderateur()))) {
+            if(!($this->auth->user()->role >= config('role.administrator'))) {
 
                 if ($request->ajax())
                 {
-                    return response('Unauthorized.', 401);
+                    return response('Unauthorized.', 403);
                 }
                 else
                 {
-                    return redirect()->back()->with('flash_error', 'Page non autorisée! Vous devez être un modérateur!');
+                    abort(403);
                 }
             }
         }

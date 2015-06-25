@@ -35,7 +35,7 @@ class RedirectIfAuthenticated {
 	{
 		if ($this->auth->check())
 		{
-			return new RedirectResponse(url('accueil'));
+			return new RedirectResponse(url('index'));
 		}
 
 		return $next($request);
