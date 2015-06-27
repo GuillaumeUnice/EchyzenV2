@@ -28,7 +28,7 @@ class ImageUploadController extends Controller {
             $user = Auth::user();
 
             if(Auth::user()->role >= config('role.administrator')) {
-                $destinationPath = config('upload.pathApp') . '/' . config('upload.pathImages');
+                $destinationPath = config('upload.pathApp') . config('upload.pathImages');
             } else {
 
                 $destinationPath = config('upload.pathUser') . $user->username . '/' . config('upload.pathImages');

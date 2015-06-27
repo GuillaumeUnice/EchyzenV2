@@ -75,6 +75,20 @@ Route::group(['prefix' => 'news', 'middleware' => 'auth.administrator'], functio
             'uses' => 'News\NewsController@getTest'
         ]
     );
+
+    Route::get('/create',
+        [
+            'as' => 'news_create',
+            'uses' => 'News\NewsController@create'
+        ]
+    );
+
+    Route::post('/create',
+        [
+            'as' => 'news_create',
+            'uses' => 'News\NewsController@store'
+        ]
+    );
 });
 
 

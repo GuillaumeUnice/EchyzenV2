@@ -11,3 +11,7 @@
         </div>
     </div>
 </div>
+
+{{-- Js loader --}}
+<script src="{{ asset('js/libraries/send/send.js') }}"></script>
+<script src="{{ asset('js/libraries/send/TweenMax.min.js') }}"></script>
