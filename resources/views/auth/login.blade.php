@@ -23,7 +23,14 @@
 				</label>
 			</div>
 	</div>
-
+<div class="input-group">
+    <span class="input input--minoru">
+        <input class="input__field input__field--minoru" type="text" id="test" />
+        <label class="input__label input__label--minoru" for="test">
+            <span class="input__label-content input__label-content--minoru">First Name</span>
+        </label>
+    </span>
+</div>
 	<p class="login button">
 		<input type="submit" class="login button btn btn-success" value="Me connecter"/>
 		<a class="btn btn-link"  href="{{ url('/password/email') }}">Mot de passe oublié ?</a>
