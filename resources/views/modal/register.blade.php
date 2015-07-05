@@ -12,6 +12,7 @@
         {!! Form::ajax_control('password', 'password_confirmation', 'Confirm Password') !!}
         {!! Form::ajax_button_submit() !!}
     {!! Form::close() !!}
-
+<a data-hover="Mot de passe oublié ?"  href="{{ url('/password/email') }}"><span>Mot de passe oublié ?</span></a>
 @endsection
+
 

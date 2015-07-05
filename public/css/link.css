@@ -1,0 +1,108 @@
+*,
+*:after,
+*::before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.modal,
+.modal:after,
+.modal::before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.modal a, #corps a {
+	position: relative;
+	display: inline-block;
+	/*margin: 15px 25px;*/
+	outline: none;
+	color: #fff;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	/*font-weight: 400;*/
+	text-shadow: 0 0 1px rgba(255,255,255,0.3);
+	font-size: 0.9em;
+}
+
+.modal a:hover,
+.modal a:focus,
+#corps a:hover,
+#corps a:focus {
+	outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Effect 10: reveal, push out */
+.modal a, #corps a {
+	position: relative;
+	z-index: 1;
+}
+
+.modal a, #corps a {
+	overflow: hidden;
+	margin: 0 5px;
+}
+
+.modal a span, #corps a span {
+	display: block;
+	padding: 0px 5px;
+	background: #61b6ff;
+
+	-webkit-transition: -webkit-transform 0.3s;
+	-moz-transition: -moz-transform 0.3s;
+	transition: transform 0.3s;
+}
+
+.modal a::before, #corps a::before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+    padding: 0px 5px;/*padding: 10px 20px;*/
+	width: 100%;
+	height: 100%;
+	background: #f55855;
+	color: #fff;
+	content: attr(data-hover);
+	-webkit-transition: -webkit-transform 0.3s;
+	-moz-transition: -moz-transform 0.3s;
+	transition: transform 0.3s;
+	-webkit-transform: translateX(-25%);
+}
+
+.modal a:hover span,
+.modal a:focus span,
+#corps a:hover span,
+#corps a:focus span {
+	-webkit-transform: translateX(100%);
+	-moz-transform: translateX(100%);
+	transform: translateX(100%);
+}
+
+.modal a:hover::before,
+.modal a:focus::before,
+#corps a:hover::before,
+#corps a:focus::before {
+	-webkit-transform: translateX(0%);
+	-moz-transform: translateX(0%);
+	transform: translateX(0%);
+}

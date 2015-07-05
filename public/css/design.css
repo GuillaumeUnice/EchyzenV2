@@ -1,17 +1,26 @@
+@font-face {
+    font-family : Bariol_Regular;
+    src: url('../fonts/Bariol_Regular/Bariol_Regular.otf'),
+    url('../fonts/Bariol_Regular/Bariol_Regular.ttf') format("truetype");
+}
+
 body {
-    font-family: "Ubuntu", sans-serif;
+    font-family: Bariol_Regular, "Ubuntu", sans-serif;
     color: white;
+    font-weight : bold;
+    font-size: 1.43em;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
 }
 /*rouge : rgba(196,20,20,1) // degrad� a modifier*/
 ::-moz-selection {
   color: white;
-  background: #bc0000;
+  background: #61b6ff;/*#bc0000;*/
 }
 
 /* line 13, ../sass/design.scss */
 ::selection {
   color: white;
-  background: #bc0000;
+  background: rgba(97, 182, 255, 0.51); /*#bc0000;*/
 }
 
 /* scroll bar */
@@ -23,7 +32,7 @@ body {
 
 /* line 21, ../sass/design.scss */
 ::-webkit-scrollbar-thumb {
-  background: #bc0000;
+  background: #c03a43;
 }
 
 /* progress bar */
@@ -71,12 +80,19 @@ body {
   background-color: #474747;
 }
 
-/* line 63, ../sass/design.scss */
+h1 {
+    color: rgba(0, 0, 0, 0.4);
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+    font-weight: 400;
+    font-size: 2.3em;
+}
 h2 {
-  color: rgba(0, 0, 0, 0.4);
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
-  font-weight: 600;
-  font-size: 2.5em;
+    /*margin: 0;
+    padding: 1em;*/
+    color: rgba(0, 0, 0, 0.4);
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+    font-weight: 300;
+    font-size: 2em;
 }
 
 /* line 69, ../sass/design.scss */
@@ -95,19 +111,45 @@ h4 {
   font-size: 1.2em;
 }
 
+h5 {
+    color: rgba(0, 0, 0, 0.4);
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+    font-weight: 200;
+    font-size: 1.1em;
+
+}
+
 /* line 82, ../sass/design.scss */
 strong {
-  font-weight: bold;
+  font-weight: 800;
   color: #61b6ff;
-  text-decoration: underline;
+    border:  1px solid #61b6ff;
+    padding-left: 2px;
+    padding-right: 2px;
+  /*text-decoration: underline;*/
 }
-
-/* line 89, ../sass/design.scss */
 em {
-  font-style: italic;
-  color: #bc0000;
+    color: #61b6ff;
 }
+pre {
+    background-color : #f55855;
+    color : #ffffff;
+}
+/* line 89, ../sass/design.scss */
+blockquote {
+  font-style: italic;
+  font-weight: 900;
+  color: #f55855;
 
+}
+blockquote::before {
+    content: "«\00A0";
+    font-size : 1.9em;
+}
+blockquote::after {
+    content: '\00A0»';
+    font-size : 1.9em;
+}
 /* line 99, ../sass/design.scss */
 hr {
   border: 0;
@@ -272,7 +314,7 @@ footer {
 /* bandeau */
 /* line 2, ../sass/partials/bandeau.scss */
 #bandeau_centre {
-  height: 65px;
+  height: 95px;
   width: 800px;
   margin: auto;
     background: url("../images/titre.png") no-repeat;
@@ -324,6 +366,18 @@ footer {
     background-image: linear-gradient(left, #c41414, #61b6ff);
   }
 }
+
+/* Media Queries */
+@media screen and (max-width: 800px) {
+    #bandeau_centre {
+        width: auto;
+        height: 55px;
+    }
+    #bandeau {
+        height: 55px;
+    }
+}
+
 /*rouge : rgba(196,20,20,1) // degradé a modifier*/
 /* Common button styles */
 /* line 12, ../sass/partials/button.scss */

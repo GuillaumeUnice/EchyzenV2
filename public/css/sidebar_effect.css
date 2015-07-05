@@ -110,14 +110,9 @@ body,
   list-style: none;
 }
 
-/* line 115, ../sass/sidebar_effect.scss */
 .st-menu h2 {
   margin: 0;
   padding: 1em;
-  color: rgba(0, 0, 0, 0.4);
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
-  font-weight: 300;
-  font-size: 2em;
 }
 
 /* line 124, ../sass/sidebar_effect.scss */
@@ -148,7 +143,7 @@ body,
 
 /* line 143, ../sass/sidebar_effect.scss */
 .st-menu ul li a:hover, .st-menu ul li span:hover {
-  background: rgba(0, 0, 0, 0.2);
+  background: #c03a43;/*rgba(0, 0, 0, 0.2);*/
   box-shadow: inset 0 -1px rgba(0, 0, 0, 0);
   color: #fff;
 }
