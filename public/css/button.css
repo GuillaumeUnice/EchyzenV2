@@ -2,8 +2,8 @@
 /*rouge : rgba(196,20,20,1) // degradé a modifier*/
 /* Common button styles */
 /* line 12, ../../sass/partials/button.scss */
-#corps button {
-  float: left;
+button.button {
+  /*float: left;*/
   min-width: 150px;
   max-width: 250px;
   display: block;
@@ -29,18 +29,18 @@
 }
 
 /* line 40, ../../sass/partials/button.scss */
-#corps button:focus {
+button.button:focus {
   outline: none;
 }
 
 /* line 43, ../../sass/partials/button.scss */
-#corps button > span {
+button.button > span {
   vertical-align: middle;
 }
 
 /* line 49, ../../sass/partials/button.scss */
-#corps button::before,
-#corps button::after {
+button.button::before,
+button.button::after {
   content: '';
   z-index: -1;
   border-radius: inherit;
@@ -58,7 +58,7 @@
 }
 
 /* line 65, ../../sass/partials/button.scss */
-#corps button::before {
+button.button::before {
   border: 2px solid #61b6ff;
   opacity: 0;
   -webkit-transform: scale3d(1.2, 1.2, 1);
@@ -68,27 +68,30 @@
 }
 
 /* line 73, ../../sass/partials/button.scss */
-#corps button::after {
+button.button::after {
   background: #61b6ff;
 
 }
 
-/* line 77, ../../sass/partials/button.scss */
-#corps button:hover {
+button.button:hover {
   color: #61b6ff;
 
 }
 
 /* line 81, ../../sass/partials/button.scss */
-#corps button:hover::before {
+button.button:hover::before {
   opacity: 1;
   -webkit-transform: scale3d(1, 1, 1);
   transform: scale3d(1, 1, 1);
 }
 
 /* line 86, ../../sass/partials/button.scss */
-#corps button:hover::after {
+button.button:hover::after {
   opacity: 0;
   -webkit-transform: scale3d(0.8, 0.8, 1);
   transform: scale3d(0.8, 0.8, 1);
+}
+input[type="submit"] {
+    background: none;
+    border: none;
 }

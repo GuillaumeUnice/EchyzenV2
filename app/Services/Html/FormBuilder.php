@@ -19,20 +19,56 @@ class FormBuilder extends CollectiveFormbuilder {
             $nom
         );
     }
+    public function control($type, $nom, $placeholder, $glyphicon = '', $required = '', $old = '')
+    {
+        return sprintf('
+            <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon %s"></span></div>
+                <span class="input input--minoru">
+                <input class="form-control input__field input__field--minoru" type="%s" name="%s" placeholder="%s" required="%s" value="%s"/>
+                <label class="input__label input__label--minoru" ></label>
+                </span>
+            </div>',
+            $glyphicon,
+            $type,
+            $nom,
+            $placeholder,
+            $required,
+            $old
+        );
+    }
+    public function custom_checkbox($name, $placeholder, $old = '') {
+        $old = $old ? 'checked' : '';
+        return sprintf('
+            <div class="form-group">
+                <div class="checkbox">
+                    <ul>
+                        <li>
+                            <input id="%s" name="%s" type="checkbox" %s>
+                            <label for="%s">%s</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>',
+            $name,
+            $name,
+            $old,
+            $name,
+            $placeholder
+        );
+    }
+
+
 
     public function button_submit($texte)
     {
-
-        return '<p class="signin button">' .
-            '<input class="btn-form" type="submit" value="' . $texte . '"/>' .
-            '</p>';
-
+        return  '<button class="button">' .
+                    '<input type="submit" value="' . $texte . '"/>' .
+                '</button>';
     }
 
     public function ajax_button_submit()
     {
-
-
         return  '<div class="send">' .
                     '<div class="send-indicator">' .
                         '<div class="send-indicator-dot"></div>' .

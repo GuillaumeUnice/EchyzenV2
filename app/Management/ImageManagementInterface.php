@@ -12,4 +12,10 @@ interface ImageManagementInterface {
      * @return mixed
      */
     public function save($image);
+
+    public function getErrorMessage();
+
+    public function getSuccessMessage();
+
+
 }

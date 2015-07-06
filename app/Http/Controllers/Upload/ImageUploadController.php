@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageRequest;
+use App\Management\ImageManagementInterface;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
@@ -21,11 +22,11 @@ class ImageUploadController extends Controller {
      * @param ImageRequest $imageRequest
      * @return mixed
      */
-    public function postUpload(ImageRequest $imageRequest)
+    public function postUpload(ImageRequest $imageRequest, ImageManagementInterface $imageManagement)
     {
         if(Input::file('imagefile')->isValid()) {
 
-            $user = Auth::user();
+            /*$user = Auth::user();
 
             if(Auth::user()->role >= config('role.administrator')) {
                 $destinationPath = config('upload.pathApp') . config('upload.pathImages');
@@ -35,12 +36,12 @@ class ImageUploadController extends Controller {
                 if(!$this->isSpaceAvailable($user, Input::file('imagefile')->getSize()))
                     return Redirect::refresh()
                         ->with('flash_error', 'L\'upload n\'est pas possible votre espace autorisee est plein!');
-            }
+            }*/
 
 
-            $fileName = $this->getFileNameAvailable($destinationPath, Input::file('imagefile'));
+            //$fileName = $this->getFileNameAvailable($destinationPath, Input::file('imagefile'));
 
-            if(Auth::user()->role >= config('role.administrator')) {
+            /*if(Auth::user()->role >= config('role.administrator')) {
                 Input::file('imagefile')->move($destinationPath, $fileName); // uploading file to given path
             } else {
                 DB::transaction(function() use ($destinationPath, $fileName, $user)
@@ -53,9 +54,13 @@ class ImageUploadController extends Controller {
             }
 
 
-            $array['file_path'] = $destinationPath . '/' . $fileName;
-            return View::make('tinyMCE/image_upload')->with($array);
-
+            $array['file_path'] = $destinationPath . '/' . $fileName;*/
+            if($imageManagement->save(Input::file('imagefile'))) {
+                $array['file_path'] = $imageManagement->getSuccessMessage();
+                return View::make('tinyMCE/image_upload')->with($array);
+            } else {
+                Redirect::refresh()->with('flash_error', $imageManagement->getErrorMessage());
+            }
         } else {
             return Redirect::refresh()->with('flash_error', 'upload a rencontré un problème!');
         }
@@ -69,7 +74,7 @@ class ImageUploadController extends Controller {
      *
      * @return mixed
      */
-    private function getFileNameAvailable($destinationPath, $file) {
+    /*private function getFileNameAvailable($destinationPath, $file) {
 
         $fileName =  $file->getClientOriginalName(); // full name + extension
 
@@ -82,7 +87,7 @@ class ImageUploadController extends Controller {
             }
         }
         return $fileName;
-    }
+    }*/
     /*
      * Cette fonction evalue s'il reste assez d'espace autorisee par l'application
      * pour permettre a l'utilisateur d'uploader son image
@@ -91,8 +96,8 @@ class ImageUploadController extends Controller {
      *
      * @return boolean true si l'utilisateur dispose de l'espace requis
      */
-    private function isSpaceAvailable($user, $sizeFile) {
+    /*private function isSpaceAvailable($user, $sizeFile) {
         return (($user->image_size + $sizeFile) <= config('upload.maxSizeByUser'));
-    }
+    }*/
 
 }

@@ -43,26 +43,32 @@ if( document.createElement('svg').getAttributeNS ) {
 	}
 
 	function controlCheckbox( el, type, svgDef ) {
-		var svg = createSVGEl( svgDef );
-		el.parentNode.appendChild( svg );
-		
-		el.addEventListener( 'change', function() {
-			if( el.checked ) {
-				draw( el, type );
-			}
-			else {
-				reset( el );
-			}
-		} );
+
+        var svg = createSVGEl(svgDef);
+        el.parentNode.appendChild(svg);
+        // Si c'est déjà checked alors dessin du SVG
+        if (el.checked) { draw(el, type); }
+
+        el.addEventListener('change', function() {
+            if (el.checked) {
+                draw(el, type);
+            } else {
+                reset(el);
+            }
+        });
+
 	}
 
 	function controlRadiobox( el, type ) {
 		var svg = createSVGEl();
 		el.parentNode.appendChild( svg );
-		el.addEventListener( 'change', function() {
-			resetRadio( el );
-			draw( el, type );
-		} );
+        // Si c'est déjà checked alors dessin du SVG
+        if (el.checked) { draw(el, type); }
+        el.addEventListener( 'change', function() {
+            resetRadio( el );
+            draw( el, type );
+        } );
+
 	}
 
 	checkbxsCross.forEach( function( el, i ) { controlCheckbox( el, 'cross' ); } );
@@ -133,5 +139,4 @@ if( document.createElement('svg').getAttributeNS ) {
 			}
 		} );
 	}
-
 }
