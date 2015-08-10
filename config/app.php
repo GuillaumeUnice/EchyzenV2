@@ -149,6 +149,7 @@ return [
         'App\Providers\HtmlServiceProvider',
         //'Collective\Html\HtmlServiceProvider',
 		'Lord\Laroute\LarouteServiceProvider',
+        'Thujohn\Twitter\TwitterServiceProvider',
 
     ],
 
@@ -200,6 +201,8 @@ return [
 		'Debugbar'  => 'Barryvdh\Debugbar\Facade',
         'HTML'     	=> 'Collective\Html\HtmlFacade',
         'Form' 		=> 'Collective\Html\FormFacade',
+        'Twitter'   => 'Thujohn\Twitter\Facades\Twitter',
+
 
 	],
 

@@ -35,6 +35,11 @@ class AppServiceProvider extends ServiceProvider
             'App\Management\ImageManagementInterface',
             'App\Management\Impl\ImageManagement'
         );
+
+        $this->app->bind(
+            'App\Management\SocialManagementInterface',
+            'App\Management\Impl\SocialManagement'
+        );
     }
 
 }
