@@ -87,7 +87,10 @@
                         </header>
                     <div id="corps">
                         <div id="progressBar"><div id="progressBarInside"></div></div>
-                            <div id="bandeau"><h1 class="bandeau_titre">News</h1><div id="bandeau_centre"></div></div>
+
+                        {{--<div id="bandeau"><h1 class="bandeau_titre">News</h1><div id="bandeau_centre"></div></div>
+
+                        <textarea></textarea>
                         <h1>Ceci est un h1</h1>
                         <h2>Ceci est un h2</h2>
                         <h3>Ceci est un h3</h3>
@@ -111,9 +114,13 @@
                         <br><br><br><br><br>
                         <br><br><br><br><br><br><br><br><br><br><br><br><br>qdsdfzfefesfez
                         <div id="corps_bis">
-                            <button>loldfgrdgrdgrgrdgreegregre</button>
+                            <button class="button">loldfgrdgrdgrgrdgreegregre</button>
+                            grddrrrrrrrrrrr
+                            <p>sflkesjgkhggerge</p>
                         </div>
 
+<button class="button">loldpanzere</button>
+sdgregregregeregre
                         <span class="input input--minoru">
                             <input required class="input__field input__field--minoru" type="text" id="input-13" />
                             <label class="input__label input__label--minoru" for="input-13">
@@ -152,7 +159,7 @@
                                                   <img src="{{ asset('images/test.png') }}" alt="" />
                                                   <figcaption>Légende associée</figcaption>
                                                 </figure>
-</div>
+</div>--}}
                         @yield('body')
                     </div>
                 </div><!-- /st-content -->

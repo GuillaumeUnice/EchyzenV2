@@ -123,3 +123,11 @@ Route::get('/upload_image',
 );
 
 Route::post('/upload_image', 'Upload\ImageUploadController@postUpload');
+
+Route::resource('rubrique', 'rubricController',
+    ['names' => ['create' => 'rubric_create']]);
+
+Route::get('twitter/authenticate', function()
+{
+    return Twitter::getBearerToken();
+});

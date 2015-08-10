@@ -18,5 +18,6 @@ Thumbs.db
 /public/uploads/users/*
 /public/uploads/app/images/*
 /bootstrap/cache
+/config/ttwitter.php
 
 
