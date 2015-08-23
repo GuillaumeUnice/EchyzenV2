@@ -34,8 +34,7 @@
 
 	<body>
         
-		@include('general.form_notification')
-		@include('general.flash_message')
+
 		{{--@if(Auth::check())
 		<li><span data-effect="st-effect-2">Profil</span></li>
 		<li><span data-effect="st-effect-3">Paramètres</span></li>
@@ -76,18 +75,14 @@
                                         <button data-effect="st-effect-1"></button>
                                     </div>
                               <ul>
-                                    <li><a href="#">News</a></li>
-                                    <li><a href="#">Galerie</a></li>
-                                    <li><a href="#">Projet</a></li>
-                                    <li><a href="#">Tuto</a></li>
-                                    <li><a href="#">Test</a></li>
-                                    <li><a href="#">Site</a></li>
+								    @yield('nav')
                               </ul>
                             </nav>
                         </header>
                     <div id="corps">
                         <div id="progressBar"><div id="progressBarInside"></div></div>
-
+		@include('general.form_notification')
+		@include('general.flash_message')
                         {{--<div id="bandeau"><h1 class="bandeau_titre">News</h1><div id="bandeau_centre"></div></div>
 
                         <textarea></textarea>

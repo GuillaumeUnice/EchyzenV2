@@ -97,7 +97,17 @@
 @section('body')
     <div id="slider" class="sl-slider-wrapper">
 		<div class="sl-slider">
-			<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+		    @foreach ($slides as $slide)
+                <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="{{ rand(-25, 25) }}" data-slice2-rotation="{{ rand(-25, 25) }}" data-slice1-scale="{{ rand(1, 2) }}" data-slice2-scale="{{ rand(1, 2) }}">
+                    <div class="sl-slide-inner">
+                        <div class="bg-img"><img alt="{{ $slide->alt }}" src="{{ asset(Config::get('image.pathSlider') . $slide->url) }}" /></div>
+                        <h2>{{ $slide->title  }} </h2>
+                        <p>{{ $slide->content }}</p>
+                    </div>
+                </div>
+            @endforeach
+
+			{{--<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
 				<div class="sl-slide-inner">
 					<div class="bg-img"><img alt="paysage" src="{{ asset(Config::get('image.pathSlider') . 'banniere.png') }}" /></div>
 					<h2>Bienvenue !!!</h2>
@@ -145,7 +155,7 @@
 					<h3>lol</h3>
 					The human body has no more need for cows' milk than it does for dogs' milk, horses' milk, or giraffes' milk.</p>
 				--></div>
-			</div>
+			</div>--}}
 		</div><!-- /sl-slider -->
 
 		<nav id="nav-arrows" class="nav-arrows">
@@ -154,11 +164,10 @@
 		</nav>
 
 		<nav id="nav-dots" class="nav-dots">
-			<span class="nav-dot-current"></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
+		    <span class="nav-dot-current"></span>
+		    @for ($i = 1; $i < count($slides); $i++)
+                <span></span>
+            @endfor
 		</nav>
 
 	</div><!-- /slider-wrapper -->
@@ -230,9 +239,7 @@
             <section id="section_social" >
                 <h2>Mes derniers tweets</h2>
                     <p>
-                        <a href="{{ Twitter::linkUser(Config::get('social.twitter.username')) }}">
-                            @EchyzenWebsite
-                        </a>
+						{!! Form::custom_link(array('link' => Twitter::linkUser(Config::get('social.twitter.username')), 'name' => '@EchyzenWebsite')) !!}
                     </p>
 
                     @foreach ($tweets as $tweet)
