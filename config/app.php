@@ -150,6 +150,7 @@ return [
         //'Collective\Html\HtmlServiceProvider',
 		'Lord\Laroute\LarouteServiceProvider',
         'Thujohn\Twitter\TwitterServiceProvider',
+		'Intervention\Image\ImageServiceProvider',
 
     ],
 
@@ -202,6 +203,7 @@ return [
         'HTML'     	=> 'Collective\Html\HtmlFacade',
         'Form' 		=> 'Collective\Html\FormFacade',
         'Twitter'   => 'Thujohn\Twitter\Facades\Twitter',
+		'Image' => 'Intervention\Image\Facades\Image',
 
 
 	],
