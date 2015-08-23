@@ -4,14 +4,14 @@
 
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-    <div class="input-group">
+    {{--<div class="input-group">
         <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
         <span class="input input--minoru">
         <input class="form-control input__field input__field--minoru" type="text" id="username" name="username" placeholder="Pseudo" value="{{ old('username') }}" required="required"/>
         <label class="input__label input__label--minoru" ></label>
         </span>
     </div>
-    <br>
+    <br>--}}
 	{{--<div class="input-group">
 		<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
 		<input class="form-control" type="text" name="username" id="username" required="required" placeholder="Pseudo" value="{{ old('email') }}"/>
@@ -22,6 +22,11 @@
 		<input class="form-control" id="password" type="password" placeholder="Mot de passe" name="password"/>
 	</div>
 	<br/>--}}
+	{!! Form::control('text', 'username', 'Pseudo', 'glyphicon-user', 'required', old('username')) !!}
+    <br/>
+    {!! Form::control('password', 'password', 'Mot de passe', 'glyphicon-lock', 'required') !!}
+    <br/>
+    {{--
     <div class="input-group">
         <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
         <span class="input input--minoru">
@@ -29,7 +34,7 @@
         <label class="input__label input__label--minoru" ></label>
         </span>
     </div>
-    <br>
+    <br>--}}
 	<!--<div class="form-group rememberme">
 			<div class="checkbox">
 				<label for="loginkeeping">
@@ -38,7 +43,9 @@
 				</label>
 			</div>
 	</div>-->
-	<div class="form-group rememberme">
+    {!! Form::custom_checkbox('remember', 'Se souvenir de moi', Input::old('remember')) !!}
+
+	{{--<div class="form-group rememberme">
 	<div class="checkbox">
     <ul>
         <li>
@@ -47,10 +54,11 @@
         </li>
     </ul>
     </div>
-    </div>
-	<p class="login button">
+    </div>--}}
+    {!! Form::button_submit('Me connecter') !!}
+	<!--<p class="login button">
 		<input type="submit" class="login button btn btn-success" value="Me connecter"/>
-	</p>
+	</p>-->
 
 </form>
 

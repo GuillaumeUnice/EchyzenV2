@@ -9,6 +9,7 @@ pour installer la Base de Donnees
 [Optionnel]
 Et si vous souhaitez peupler la Base de Données vous pouvez executer la commande : php artisan db:seed
 
+Pensez ensuite a réaliser un php artisan vendor:publish et completer config file : ttwiter.php pour connecter compte twitter a l'appli
 enjoy :D
 
 ## Laravel PHP Framework
