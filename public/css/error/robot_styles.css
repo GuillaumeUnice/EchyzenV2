@@ -1,0 +1,40 @@
+.robot_limbs_and_ears{
+	fill:#503643;
+}
+
+.robot_joints_and_belly{
+	fill:#61b6ff;
+}
+
+.error_code{
+	fill: rgb(60,60,60);
+	font-size:322px;
+}
+
+.robot_body{
+	fill: rgba(97, 182, 255, 0.8);
+}
+
+.robot_eye_whites{
+	fill:#F3ECBA;
+}
+
+.robot_hands_feet{
+	fill:#f55855;
+}
+
+.robot_antenna{
+	fill:#f55855;
+}
+
+.robot_antenna_highlight{
+	fill:#c03a43;
+}
+
+.robot_eyes{
+	fill:#f55855;
+}
+
+.robot_eyes_highlight{
+	fill:#c03a43;
+}

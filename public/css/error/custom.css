@@ -1,0 +1,55 @@
+/* robot_page*/
+.robotpage-top-half{
+    overflow:hidden;
+}
+
+#brokebotSVG{
+    height:150px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:50px;
+    font-weight:bold;
+    width:100%;
+}
+
+#robot-text{
+    color:#f55855;
+    text-align:center;
+    font-size:3em;
+    margin-top:.5em;
+    margin-bottom:.2em;
+    padding:0;
+}
+
+/* custom input search */
+.search-form{
+    margin-top : 20px;
+    margin-bottom : 20px;
+}
+
+input[type="text"]{
+    height: 42px;
+    border: 1px solid #e6e4e4;
+    outline-color: #ccc;
+    transition: all .2s linear; -moz-transition: all .2s linear; -webkit-transition : all .2s linear; -o-transition: all .2s linear;
+}
+
+input[type="text"]:focus{
+    outline-color: #f55855;
+}
+
+input[type="submit"]{
+    height: 42px;
+    border: 1px solid #f55855;
+    background-color: #f55855;
+    color: #fff;
+    text-transform: uppercase;
+    transition: all .2s linear; -moz-transition: all .2s linear; -webkit-transition : all .2s linear; -o-transition: all .2s linear;
+}
+
+input[type="submit"]:hover{
+    background-color: #c03a43;
+}
+
+
+
