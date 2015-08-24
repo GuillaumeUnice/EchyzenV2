@@ -22,9 +22,24 @@
 		<input class="form-control" id="password" type="password" placeholder="Mot de passe" name="password"/>
 	</div>
 	<br/>--}}
-	{!! Form::control('text', 'username', 'Pseudo', 'glyphicon-user', 'required', old('username')) !!}
-    <br/>
-    {!! Form::control('password', 'password', 'Mot de passe', 'glyphicon-lock', 'required') !!}
+  {!!
+    Form::customInput( array(
+                          'type'        => 'text',
+                          'name'        => 'username',
+                          'placeholder' => 'Pseudo',
+                          'glyphicon'   => 'glyphicon-user',
+                          'required'    => 'required',
+                          'old'         => old('username')))
+  !!}
+  <br/>
+    {!!
+      Form::customInput( array(
+                            'type'        => 'password',
+                            'name'        => 'password',
+                            'placeholder' => 'Mot de passe',
+                            'glyphicon'   => 'glyphicon-lock',
+                            'required'    => 'required'))
+    !!}
     <br/>
     {{--
     <div class="input-group">
@@ -43,7 +58,12 @@
 				</label>
 			</div>
 	</div>-->
-    {!! Form::custom_checkbox('remember', 'Se souvenir de moi', Input::old('remember')) !!}
+    {!!
+      Form::customCheckbox( array(
+                              'name'        => 'remember',
+                              'placeholder' => 'Se souvenir de moi',
+                              'old'         => Input::old('remember')))
+    !!}
 
 	{{--<div class="form-group rememberme">
 	<div class="checkbox">
@@ -55,7 +75,7 @@
     </ul>
     </div>
     </div>--}}
-    {!! Form::button_submit('Me connecter') !!}
+    {!! Form::buttonSubmit( array('text' => 'Me connecter') ) !!}
 	<!--<p class="login button">
 		<input type="submit" class="login button btn btn-success" value="Me connecter"/>
 	</p>-->

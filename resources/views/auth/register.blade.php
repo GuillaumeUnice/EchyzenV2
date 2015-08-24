@@ -33,7 +33,7 @@
                     </div>
                     <br/>
 
-                    {!! Form::button_submit('Envoyer !') !!}
+                    {!! Form::buttonSubmit( array('text' => 'Envoyer !') ) !!}
                 <!--<p class="signin button">
                     <input class="btn-form" type="submit" value="S'inscrire"/>
                 </p>-->

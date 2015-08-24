@@ -239,7 +239,7 @@
             <section id="section_social" >
                 <h2>Mes derniers tweets</h2>
                     <p>
-						{!! Form::custom_link(array('link' => Twitter::linkUser(Config::get('social.twitter.username')), 'name' => '@EchyzenWebsite')) !!}
+						{!! HTML::customLink(array('link' => Twitter::linkUser(Config::get('social.twitter.username')), 'name' => '@EchyzenWebsite')) !!}
                     </p>
 
                     @foreach ($tweets as $tweet)
