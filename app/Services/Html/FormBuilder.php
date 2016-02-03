@@ -22,13 +22,46 @@ class FormBuilder extends CollectiveFormbuilder
     );
   }
 
-  public function customInput($array)//$type, $nom, $placeholder, $glyphicon = '', $required = '', $old = '')
+  public function customMultipleSelectOpen($array)
+  {
+    return sprintf('
+      <div class="form-group">
+        <div class="input-group-addon"><span class="glyphicon %s"></span>&nbsp;&nbsp;%s</div>
+          <select class="select-multiple custom-select2 form-control" name="%s" multiple>
+      ',
+      (isset($array['glyphicon'])) ? $array['glyphicon'] : '',
+      (isset($array['description'])) ? $array['description'] : '',
+      (isset($array['name'])) ? $array['name'] : ''
+    );
+  }
+
+  public function customMultipleSelectOption($array)
+  {
+    return sprintf('
+        <option value="%s" %s >%s</option>
+       ',
+      (isset($array['value'])) ? $array['value'] : '',
+      (isset($array['selected'])) ? $array['selected'] : '',
+      (isset($array['name'])) ? $array['name'] : ''
+    );
+  }
+
+  public function customMultipleSelectClose($array = null)
+  {
+    return sprintf('
+      </select>
+        </div>
+       '
+    );
+  }
+
+  public function customInput($array)
   {
     return sprintf('
             <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon %s"></span></div>
                 <span class="input input--minoru">
-                <input class="form-control input__field input__field--minoru" type="%s" name="%s" placeholder="%s" %s value="%s"/>
+                <input class="form-control input__field input__field--minoru" type="%s" name="%s" placeholder="%s" %s value="%s" min="%s" max="%s" />
                 <label class="input__label input__label--minoru" ></label>
                 </span>
             </div>',
@@ -37,7 +70,9 @@ class FormBuilder extends CollectiveFormbuilder
       (isset($array['name'])) ? $array['name'] : '',
       (isset($array['placeholder'])) ? $array['placeholder'] : '',
       (isset($array['required'])) ? $array['required'] : '',
-      (isset($array['old'])) ? $array['old'] : ''
+      (isset($array['old'])) ? $array['old'] : '',
+      (isset($array['min'])) ? $array['min'] : '',
+      (isset($array['max'])) ? $array['max'] : ''
     );
   }
 
@@ -86,6 +121,16 @@ class FormBuilder extends CollectiveFormbuilder
       (isset($array['placeholder'])) ? $array['placeholder'] : ''
     );
   }
+
+  public function iconSubmit($array)
+  {
+    return sprintf('<button class="button--icon button--sacnite" type="submit">
+                <i class="button__icon glyphicon %s"></i>
+            </button>',
+      (isset($array['glyphicon'])) ? $array['glyphicon'] : ''
+    );
+  }
+
 
   public function buttonSubmit($array)
   {

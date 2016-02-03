@@ -151,6 +151,7 @@ return [
 		'Lord\Laroute\LarouteServiceProvider',
         'Thujohn\Twitter\TwitterServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
+		'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
 
     ],
 
@@ -204,6 +205,8 @@ return [
         'Form' 		=> 'Collective\Html\FormFacade',
         'Twitter'   => 'Thujohn\Twitter\Facades\Twitter',
 		'Image' => 'Intervention\Image\Facades\Image',
+		'JWTAuth'   => 'Tymon\JWTAuth\Facades\JWTAuth',
+		'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
 
 
 	],

@@ -32,6 +32,7 @@
 		
 	</head>
 
+	<!--<body ng-app="authApp" ng-controller="AuthController">-->
 	<body>
         
 
@@ -184,9 +185,9 @@ sdgregregregeregre
 		<script src="{{ asset('js/classie.js') }}"></script>
         <script src="{{ asset('js/modernizr.custom.js') }}"></script>
 
-        {{-- Js laroute --}}
+        {{-- Js laroute
         <script src="{{ asset('js/laroute.js') }}" type="text/javascript" ></script>
-
+--}}
 		{{-- Js progressBar --}}
 		<script src="{{ asset('js/progress_bar.js') }}" type="text/javascript" ></script>
 
@@ -214,6 +215,10 @@ sdgregregregeregre
                 $('#responsive-menu').responsiveMenu();
             });
         </script>
+		
+		
+
+		
 		@yield('script')
 	</body>
 

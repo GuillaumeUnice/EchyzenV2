@@ -22,7 +22,7 @@ interface ImageManagementInterface {
 
     public function getErrorMessage();
 
-    public function getSuccessMessage();
+    public function getUrl();
 
     public function getfileName();
 

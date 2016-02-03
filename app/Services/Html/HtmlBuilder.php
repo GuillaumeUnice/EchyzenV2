@@ -20,4 +20,16 @@ class HtmlBuilder extends CollectiveHtmlBuilder {
     );
   }
 
+  public function customLinkIcon($array)
+  {
+    return sprintf('<a href="%s">
+                <button class="button--icon button--sacnite" type="submit">
+                  <i class="button__icon glyphicon %s"></i>
+                </button>
+              </a>',
+      (isset($array['route'])) ? $array['route'] : '#',
+      (isset($array['glyphicon'])) ? $array['glyphicon'] : ''
+    );
+  }
+
 }

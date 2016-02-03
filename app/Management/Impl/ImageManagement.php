@@ -11,14 +11,14 @@ use Intervention\Image\Facades\Image;
 class ImageManagement implements ImageManagementInterface {
   protected $user;
   private $errorMessage = '';
-  private $successMessage = '';
+  private $url = '';
   private $fileName = '';
 
   public function getErrorMessage() {
     return $this->errorMessage;
   }
-  public function getSuccessMessage() {
-    return $this->successMessage;
+  public function getUrl() {
+    return $this->url;
   }
 
   public function getfileName() {
@@ -61,7 +61,7 @@ class ImageManagement implements ImageManagementInterface {
 
       // param retour
       $this->fileName = $fileName;
-      $this->successMessage = $destinationPath . '/' . $fileName;
+      $this->url = $destinationPath . '/' . $fileName;
       return true;
     } else {
       $this->errorMessage = 'L\'upload n\'est pas possible votre espace autorisee est plein!';
@@ -124,6 +124,6 @@ class ImageManagement implements ImageManagementInterface {
    */
   public function delete($pathFilename) {
     File::delete($pathFilename);
-    return File::exists($pathFilename);
+    return !File::exists($pathFilename);
   }
 }

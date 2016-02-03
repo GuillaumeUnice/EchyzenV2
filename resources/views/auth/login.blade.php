@@ -1,3 +1,12 @@
+<h5 ng-if="$root.authenticated">Welcome, <% $root.currentUser.username %></h5>
+<form>
+<input type="text" class="form-control" placeholder="username" ng-model="username">
+<% username%>
+<input type="password" class="form-control" placeholder="password" ng-model="password">
+<button class="btn btn-primary" ng-click="login()">Submit</button>
+
+</form>
+
 <h3 xmlns="http://www.w3.org/1999/html">Connexion</h3><br/>
 
 <form role="form" class="ajax_form  " method="POST" action="{{ url('/auth/login') }}">

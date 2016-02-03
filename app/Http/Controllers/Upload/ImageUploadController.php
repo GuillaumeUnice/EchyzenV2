@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 
 class ImageUploadController extends Controller {
 
@@ -56,7 +57,7 @@ class ImageUploadController extends Controller {
 
             $array['file_path'] = $destinationPath . '/' . $fileName;*/
             if($imageManagement->save(Input::file('imagefile'))) {
-                $array['file_path'] = $imageManagement->getSuccessMessage();
+                $array['file_path'] = $imageManagement->getUrl();
                 return View::make('tinyMCE/image_upload')->with($array);
             } else {
                 Redirect::refresh()->with('flash_error', $imageManagement->getErrorMessage());

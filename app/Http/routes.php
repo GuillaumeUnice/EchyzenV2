@@ -101,8 +101,18 @@ Route::group(['prefix' => 'news', 'middleware' => 'auth.administrator'], functio
  */
 
 
-    Route::resource('project', 'Project\ProjectController');
+    Route::resource('project', 'Project\ProjectController',
+      array('only' => array('index', 'show')));
 
+    Route::resource('project.comment', 'Project\CommentProjectController');
+
+    Route::get('project/views/{name}', function($name) {
+
+      if (View::exists($name)) {
+        return View::make($name);
+      }
+      return "Error 404";
+    });
 
 /*
  |---------------------------------------------------------------------------------------------------------------------|
@@ -115,13 +125,15 @@ Route::group(['prefix' => 'news', 'middleware' => 'auth.administrator'], functio
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth.administrator'], function () {
 
-    Route::get('views/{name}', function($name) {
 
-        if (View::exists($name)) {
-            return View::make($name);
-        }
-        return "Error 404";
-    });
+
+    Route::resource('project', 'Project\ProjectController',
+      array('except' => array('index', 'show')));
+
+    Route::get('project', [
+      'as' => 'admin.project.index',
+      'uses' => 'Project\ProjectController@adminIndex'
+    ]);
 
     Route::resource('slide', 'Index\SlideController');
 
@@ -163,3 +175,14 @@ Route::group(['prefix' => 'website'], function () {
 
 });
 
+Route::get('views/{name}', function($name) {
+
+  if (View::exists($name)) {
+    return View::make($name);
+  }
+  return "Error 404";
+});
+
+Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
+Route::post('authenticate', 'AuthenticateController@authenticate');
+Route::get('authenticate/user', 'AuthenticateController@getAuthenticatedUser');
